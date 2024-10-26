@@ -306,7 +306,12 @@ function CollectionConfig({ collectionName, configuration }) {
 
 function PluginConfig({ configuration }) {
   const log = strapi.log // has to be inside a scope
+  log.info(`[PluginConfig] configuration ${JSON.stringify(configuration)}`)
   const { apiKey, host, ...collections } = configuration
+
+  if (!collections) {
+	log.error('Please add collections in the config of the plugin')
+  }
   const options = {}
 
   return {
@@ -331,6 +336,9 @@ function PluginConfig({ configuration }) {
     },
 
     validateCollections() {
+		log.info(
+            `[PluginConfig - validateCollections]: collections ${JSON.stringify(collections)}`,
+          )
       // Itterate over all collections to validate their configuration
       for (const collection in collections) {
         if (!isObject(collections[collection])) {
@@ -384,7 +392,7 @@ function validatePluginConfig(configuration) {
   const options = PluginConfig({ configuration })
     .validateApiKey()
     .validateHost()
-    .validateCollections()
+	.validateCollections()
     .get()
 
   Object.assign(configuration, options)

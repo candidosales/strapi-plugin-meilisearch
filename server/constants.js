@@ -1,5 +1,3 @@
-'use strict'
-
 const ACTIONS = {
   read: 'plugin::meilisearch.read',
   settings: 'plugin::meilisearch.settings.edit',

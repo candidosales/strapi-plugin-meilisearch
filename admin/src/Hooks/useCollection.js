@@ -29,6 +29,8 @@ export function useCollection() {
   const fetchCollections = async () => {
     const { data, error } = await get(`/${pluginId}/content-type/`)
 
+	console.log('[useCollection] fetchCollections - data', data)
+
     if (error) {
       handleNotification({
         type: 'warning',
@@ -95,6 +97,8 @@ export function useCollection() {
           contentType,
         },
       })
+	  console.log('[useCollection] addCollection - error', error)
+
       if (error) {
         handleNotification({
           type: 'warning',

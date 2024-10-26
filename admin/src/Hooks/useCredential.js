@@ -50,6 +50,9 @@ export function useCredential() {
   const fetchCredentials = async () => {
     const { data, error } = await get(`/${pluginId}/credential`)
 
+	console.log('[useCredential] fetchCredentials - data', data)
+
+
     if (error) {
       handleNotification({
         type: 'warning',
